@@ -20,7 +20,8 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping
-    public String items(@ModelAttribute("itemSearch") ItemSearchCond itemSearch, Model model) {
+    public String items(
+            @ModelAttribute("itemSearch") ItemSearchCond itemSearch, Model model) {
         List<Item> items = itemService.findItems(itemSearch);
         model.addAttribute("items", items);
         return "items";
@@ -39,7 +40,8 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
+    public String addItem(
+            @ModelAttribute Item item, RedirectAttributes redirectAttributes) {
         Item savedItem = itemService.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
@@ -54,9 +56,9 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute ItemUpdateDto updateParam) {
+    public String edit(@PathVariable Long itemId,
+                       @ModelAttribute ItemUpdateDto updateParam) {
         itemService.update(itemId, updateParam);
         return "redirect:/items/{itemId}";
     }
-
 }

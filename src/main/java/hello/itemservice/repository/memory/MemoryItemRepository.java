@@ -33,6 +33,7 @@ public class MemoryItemRepository implements ItemRepository {
 
     @Override
     public Optional<Item> findById(Long id) {
+
         return Optional.ofNullable(store.get(id));
     }
 
@@ -58,5 +59,4 @@ public class MemoryItemRepository implements ItemRepository {
     public void clearStore() {
         store.clear();
     }
-
 }
